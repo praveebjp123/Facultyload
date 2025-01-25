@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Load Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Faculty Load Management</h1>
+        <form id="facultyForm">
+            <div class="mb-3">
+                <label for="facultyName" class="form-label">Faculty Name</label>
+                <input type="text" id="facultyName" class="form-control" placeholder="Enter faculty name" required>
+            </div>
+            <div class="mb-3">
+                <label for="subjects" class="form-label">Select Subjects</label>
+                <select id="subjects" class="form-select" multiple>
+                    <optgroup label="BCA2 - DVD">
+                        <option value="Data Structures and Algorithms">Data Structures and Algorithms</option>
+                        <option value="Numerical and Statistical Methods">Numerical and Statistical Methods</option>
+                        <option value="Object Oriented Programming Using Java">Object Oriented Programming Using Java</option>
+                    </optgroup>
+                    <optgroup label="BCA2 - VVS">
+                        <option value="Data Structures and Algorithms - VVS">Data Structures and Algorithms - VVS</option>
+                        <option value="Numerical and Statistical Methods - VVS">Numerical and Statistical Methods - VVS</option>
+                        <option value="Object Oriented Programming Using Java - VVS">Object Oriented Programming Using Java - VVS</option>
+                    </optgroup>
+                    <optgroup label="BCA4 - DVD">
+                        <option value="Python Programming">Python Programming</option>
+                        <option value="Multimedia & Animation">Multimedia & Animation</option>
+                        <option value="Operating System Concepts">Operating System Concepts</option>
+                        <option value="Open Source Tools">Open Source Tools</option>
+                    </optgroup>
+                    <optgroup label="BCA4 - VVS">
+                        <option value="Python Programming - VVS">Python Programming - VVS</option>
+                        <option value="Multimedia & Animation - VVS">Multimedia & Animation - VVS</option>
+                        <option value="Operating System Concepts - VVS">Operating System Concepts - VVS</option>
+                        <option value="Open Source Tools - VVS">Open Source Tools - VVS</option>
+                    </optgroup>
+                    <optgroup label="BCA6 - DVD">
+                        <option value="PHP and MySQL">PHP and MySQL</option>
+                        <option value="Artificial Intelligence and Applications">Artificial Intelligence and Applications</option>
+                        <option value="Fundamentals of Data Science">Fundamentals of Data Science</option>
+                        <option value="Web Content Management System">Web Content Management System</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="labs" class="form-label">Select Labs</label>
+                <select id="labs" class="form-select" multiple>
+                    <optgroup label="BCA2 - LAB">
+                        <option value="Data Structures and Algorithms Lab">Data Structures and Algorithms Lab</option>
+                        <option value="Numerical and Statistical Methods Lab">Numerical and Statistical Methods Lab</option>
+                        <option value="Object Oriented Programming Using Java Lab">Object Oriented Programming Using Java Lab</option>
+                    </optgroup>
+                    <optgroup label="BCA4 - LAB">
+                        <option value="Python Programming LAB">Python Programming LAB</option>
+                        <option value="Multimedia & Animation LAB">Multimedia & Animation LAB</option>
+                    </optgroup>
+                    <optgroup label="BCA6 - LAB">
+                        <option value="PHP and MySQL Lab">PHP and MySQL Lab</option>
+                        <option value="Project Work">Project Work</option>
+                        <option value="Internship">Internship</option>
+                    </optgroup>
+                </select>
+            </div>
+            <button type="button" class="btn btn-primary" id="addFaculty">Add Faculty</button>
+        </form>
+        <div class="mt-4">
+            <h4>Faculty Load Details</h4>
+            <table class="table table-bordered" id="facultyTable">
+                <thead>
+                    <tr>
+                        <th>Faculty Name</th>
+                        <th>Subjects</th>
+                        <th>Labs</th>
+                        <th>Total Subjects</th>
+                        <th>Total Labs</th>
+                        <th>Overall Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows will be added dynamically here -->
+                </tbody>
+            </table>
+            <button class="btn btn-secondary mt-2" id="printView">Print View</button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
