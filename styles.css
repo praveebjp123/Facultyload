@@ -1,9 +1,42 @@
 body {
+    font-family: Arial, sans-serif;
     background-color: #f8f9fa;
 }
-h1 {
-    color: #343a40;
-}
+
 table {
-    background-color: #ffffff;
+    width: 100%;
+    margin-top: 20px;
 }
+
+th, td {
+    text-align: center;
+}
+
+button {
+    margin-right: 5px;
+}
+
+#printView {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    font-size: 16px;
+    border: none;
+}
+.footer {
+    margin-top: 20px;
+    padding: 10px 0;
+    background-color: #f9f9f9;
+    border-top: 1px solid #ddd;
+    text-align: center;
+}
+.footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+.footer a:hover {
+    text-decoration: underline;
+}
+
