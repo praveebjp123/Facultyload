@@ -2,9 +2,7 @@ document.getElementById("generateClasses").addEventListener("click", function ()
     const selectedSubjects = Array.from(document.getElementById("subjects").selectedOptions).map(option => option.value);
     const selectedLabs = Array.from(document.getElementById("labs").selectedOptions).map(option => option.value);
 
-    const allSelectedItems = [...selectedSubjects, ...selectedLabs];
-
-    if (allSelectedItems.length === 0) {
+    if (selectedSubjects.length === 0 && selectedLabs.length === 0) {
         alert("Please select at least one subject or lab.");
         return;
     }
@@ -12,16 +10,31 @@ document.getElementById("generateClasses").addEventListener("click", function ()
     const classesContainer = document.getElementById("classesContainer");
     classesContainer.innerHTML = "<h5>Enter Classes Per Week:</h5>";
 
-    allSelectedItems.forEach(item => {
-        const itemDiv = document.createElement("div");
-        itemDiv.className = "mb-3";
+    if (selectedSubjects.length > 0) {
+        classesContainer.innerHTML += "<h6>Subjects:</h6>";
+        selectedSubjects.forEach(subject => {
+            const subjectDiv = document.createElement("div");
+            subjectDiv.className = "mb-3";
+            subjectDiv.innerHTML = `
+                <label>${subject}</label>
+                <input type="number" class="form-control classCount" data-item="${subject}" data-type="subject" placeholder="Enter number of classes per week" min="1" required>
+            `;
+            classesContainer.appendChild(subjectDiv);
+        });
+    }
 
-        itemDiv.innerHTML = `
-            <label>${item}</label>
-            <input type="number" class="form-control classCount" data-item="${item}" placeholder="Enter number of classes per week" min="1" required>
-        `;
-        classesContainer.appendChild(itemDiv);
-    });
+    if (selectedLabs.length > 0) {
+        classesContainer.innerHTML += "<h6>Labs:</h6>";
+        selectedLabs.forEach(lab => {
+            const labDiv = document.createElement("div");
+            labDiv.className = "mb-3";
+            labDiv.innerHTML = `
+                <label>${lab}</label>
+                <input type="number" class="form-control classCount" data-item="${lab}" data-type="lab" placeholder="Enter number of classes per week" min="1" required>
+            `;
+            classesContainer.appendChild(labDiv);
+        });
+    }
 
     document.getElementById("addFaculty").disabled = false;
 });
@@ -43,11 +56,12 @@ document.getElementById("addFaculty").addEventListener("click", function () {
     classInputs.forEach(input => {
         const item = input.dataset.item;
         const classCount = parseInt(input.value);
+        const type = input.dataset.type; // Identify whether it's a subject or a lab
 
-        if (item.includes("Lab")) {
+        if (type === "lab") {
             labs.push(`${item} (${classCount} classes/week)`);
             totalLabLoad += classCount;
-        } else {
+        } else if (type === "subject") {
             subjects.push(`${item} (${classCount} classes/week)`);
             totalSubjectLoad += classCount;
         }
@@ -94,32 +108,27 @@ document.querySelector("#facultyTable").addEventListener("click", function (even
 
         document.getElementById("facultyName").value = facultyName;
 
-        // Populate selected items
-        const subjectsArray = subjects.split(", ");
-        const labsArray = labs.split(", ");
+        const subjectsArray = subjects.split(", ").map(item => item.split(" (")[0]);
+        const labsArray = labs.split(", ").map(item => item.split(" (")[0]);
 
-        // Clear previous selections
         const subjectsSelect = document.getElementById("subjects");
         const labsSelect = document.getElementById("labs");
+
         [...subjectsSelect.options, ...labsSelect.options].forEach(option => {
-            option.selected = false;
+            option.selected = false; // Clear previous selections
         });
 
-        // Select relevant items
         subjectsArray.forEach(subject => {
-            const option = Array.from(subjectsSelect.options).find(opt => subject.includes(opt.value));
+            const option = Array.from(subjectsSelect.options).find(opt => opt.value === subject);
             if (option) option.selected = true;
         });
 
         labsArray.forEach(lab => {
-            const option = Array.from(labsSelect.options).find(opt => lab.includes(opt.value));
+            const option = Array.from(labsSelect.options).find(opt => opt.value === lab);
             if (option) option.selected = true;
         });
 
-        // Re-enable the "Add Faculty" button
-        document.getElementById("addFaculty").disabled = false;
-
-        // Remove the row from the table to avoid duplicates
+        document.getElementById("generateClasses").click(); // Regenerate classes per week fields
         row.remove();
     }
 });
@@ -154,3 +163,4 @@ document.getElementById("printView").addEventListener("click", function () {
     printWindow.print();
 });
 
+ 
